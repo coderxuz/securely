@@ -21,7 +21,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.x"  # Adjust as per your project requirements
+          python-version: "3.x"
 
       - name: Install dependencies
         run: |
@@ -33,6 +33,6 @@ jobs:
           python -m build
 
       - name: Publish package distributions to PyPI
-        uses: pypa/gh-action-pypi-publish@v0.0.1
+        uses: pypa/gh-action-pypi-publish@v1
         with:
           password: ${{ secrets.PYPI_API_TOKEN }}
