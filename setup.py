@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="securely",
-    version="0.1.3",  # Make sure to update with every release
+    version="0.1.7",  # Make sure to update with every release
     author="Xursand",
     author_email="coderxuz2009@gmail.com",
     description="This package will help you while authorization and authentication in fastapi",
