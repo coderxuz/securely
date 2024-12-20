@@ -1,8 +1,8 @@
 Metadata-Version: 2.1
 Name: securely
-Version: 0.1.0
+Version: 0.1.3
 Summary: This package will help you while authorization and authentication in fastapi
-Home-page: https://github.com/yourusername/my_package
+Home-page: https://github.com/coderxuz/securely
 Author: Xursand
 Author-email: coderxuz2009@gmail.com
 Classifier: Programming Language :: Python :: 3
@@ -10,3 +10,5 @@ Classifier: License :: OSI Approved :: MIT License
 Classifier: Operating System :: OS Independent
 Requires-Python: >=3.6
 Description-Content-Type: text/markdown
+Requires-Dist: passlib
+Requires-Dist: authlib

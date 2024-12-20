@@ -5,4 +5,5 @@ securely/auth.py
 securely.egg-info/PKG-INFO
 securely.egg-info/SOURCES.txt
 securely.egg-info/dependency_links.txt
+securely.egg-info/requires.txt
 securely.egg-info/top_level.txt
