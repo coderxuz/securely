@@ -1,0 +1,8 @@
+README.md
+setup.py
+securely/__init__.py
+securely/auth.py
+securely.egg-info/PKG-INFO
+securely.egg-info/SOURCES.txt
+securely.egg-info/dependency_links.txt
+securely.egg-info/top_level.txt
