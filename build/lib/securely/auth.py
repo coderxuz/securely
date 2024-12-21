@@ -13,7 +13,7 @@ from datetime import datetime, timedelta
 
 
 class Auth:
-    pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+    
 
     def __init__(
         self,
@@ -27,7 +27,8 @@ class Auth:
             raise TypeError(f"{type(secret_key) } is not assignable to timedelta")
         if not isinstance(refresh_token_expires, timedelta):
             raise TypeError(f"{type(secret_key) } is not assignable to timedelta")
-
+        
+        self.pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
         self.secret_key = secret_key
         self.refresh_token_expires = refresh_token_expires
         self.access_token_expires = access_token_expires
