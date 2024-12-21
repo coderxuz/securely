@@ -1,18 +1,3 @@
-# Source code:https://github.com/coderxuz/securely
-# Securely
-
-**Securely** is a Python package that helps with authentication and authorization in FastAPI applications.
-
-## Installation
-
-You can install the package via `pip`:
-
-```bash
-pip install securely
-```
-
-# Quick start
-```markdown
 from securely import Auth
 from fastapi import FastAPI
 
@@ -39,7 +24,6 @@ async def login(data: dict):
     just_db.append(new_user)
 
     tokens = auth.create_tokens(subject=new_user.get("username"))
+    auth.create_tokens(subject=new_user.get("username"))
 
     return tokens
-
-```

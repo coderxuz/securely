@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="securely",
-    version="0.1.7",  # Make sure to update with every release
+    version="0.1.8",  # Make sure to update with every release
     author="Xursand",
     author_email="coderxuz2009@gmail.com",
     description="This package will help you while authorization and authentication in fastapi",
@@ -18,6 +18,7 @@ setup(
     python_requires='>=3.6',
     install_requires=[
         'passlib',
-        'authlib'# Add any required dependencies
+        'authlib',
+        'bcrypt'# Add any required dependencies
     ],
 )

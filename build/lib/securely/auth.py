@@ -10,7 +10,6 @@ from fastapi import HTTPException, status
 
 
 from datetime import datetime, timedelta
-import os
 
 
 class Auth:

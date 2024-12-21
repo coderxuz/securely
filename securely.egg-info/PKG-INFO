@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: securely
-Version: 0.1.7
+Version: 0.1.8
 Summary: This package will help you while authorization and authentication in fastapi
 Home-page: https://github.com/coderxuz/securely
 Author: Xursand
@@ -12,6 +12,7 @@ Requires-Python: >=3.6
 Description-Content-Type: text/markdown
 Requires-Dist: passlib
 Requires-Dist: authlib
+Requires-Dist: bcrypt
 
 # Source code:https://github.com/coderxuz/securely
 # Securely
@@ -28,7 +29,6 @@ pip install securely
 
 # Quick start
 ```markdown
-```python
 from securely import Auth
 from fastapi import FastAPI
 
