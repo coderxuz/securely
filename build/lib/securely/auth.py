@@ -1,5 +1,5 @@
 from passlib.context import CryptContext
-from authlib.jose import jwt
+from authlib.jose import jwt, JWTClaims  # type: ignore
 from authlib.jose.errors import (
     DecodeError,
     ExpiredTokenError,
@@ -10,10 +10,15 @@ from fastapi import HTTPException, status
 
 
 from datetime import datetime, timedelta
+from typing import TypedDict
+
+
+class Tokens(TypedDict):
+    accessToken: str
+    refreshToken: str
 
 
 class Auth:
-    
 
     def __init__(
         self,
@@ -21,13 +26,7 @@ class Auth:
         access_token_expires: timedelta,
         refresh_token_expires: timedelta,
     ):
-        if not isinstance(secret_key, str):
-            raise TypeError(f"{type(secret_key) } is not assignable to str type")
-        if not isinstance(access_token_expires, timedelta):
-            raise TypeError(f"{type(secret_key) } is not assignable to timedelta")
-        if not isinstance(refresh_token_expires, timedelta):
-            raise TypeError(f"{type(secret_key) } is not assignable to timedelta")
-        
+
         self.pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
         self.secret_key = secret_key
         self.refresh_token_expires = refresh_token_expires
@@ -36,10 +35,10 @@ class Auth:
     def hash_password(self, password: str) -> str:
         return self.pwd_context.hash(password)
 
-    def verify_password(self, plain_password, hashed_password):
+    def verify_password(self, plain_password: str, hashed_password: str):
         return self.pwd_context.verify(plain_password, hashed_password)
 
-    def create_tokens(self, subject: str) -> dict:
+    def create_tokens(self, subject: str) -> Tokens:
         # Access token expires in 'access_exp' minutes
         access_token_exp = datetime.utcnow() + self.access_token_expires
         access_token = jwt.encode(
@@ -56,21 +55,30 @@ class Auth:
 
         return {"accessToken": access_token, "refreshToken": refresh_token}
 
-    def _decode_token(self, token: str) -> dict:
+    def _decode_token(self, token: str) -> JWTClaims:
         try:
-            return jwt.decode(token, self.secret_key)
+            token_decoded:JWTClaims = jwt.decode(token, self.secret_key) # type: ignore
+            if not token_decoded:
+                raise HTTPException(
+                    status_code=status.HTTP_401_UNAUTHORIZED, detail="Not authenticated"
+                )
+            if not isinstance(token_decoded, JWTClaims):
+                raise HTTPException(
+                    status_code=status.HTTP_401_UNAUTHORIZED, detail="Not authenticated"
+                )
+            return token_decoded
         except DecodeError:
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED, detail="Not authenticated"
             )
 
-    def get_subject(self, token: str) -> str:
+    def get_subject(self, token: str) -> JWTClaims:
         try:
             # Decode the token
-            payload:dict = jwt.decode(token, self.secret_key)
+            payload: JWTClaims = jwt.decode(token, self.secret_key) # type: ignore
 
             # Extract the subject
-            subject = payload.get("sub")
+            subject:JWTClaims = payload.get("sub") # type: ignore
             if not subject:
                 raise HTTPException(
                     status_code=status.HTTP_400_BAD_REQUEST,

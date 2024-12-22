@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: securely
-Version: 0.1.9
+Version: 0.2.0
 Summary: This package will help you while authorization and authentication in fastapi
 Home-page: https://github.com/coderxuz/securely
 Author: Xursand
